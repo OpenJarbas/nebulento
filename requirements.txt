@@ -1,0 +1,2 @@
+rapidfuzz
+quebra_frases
