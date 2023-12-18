@@ -4,7 +4,9 @@
 
 Built on top of [rapidfuzz](https://github.com/maxbachmann/rapidfuzz)
 
-## Example
+Finds the closest matching intent via fuzzy match between the text and all of the training sentences you provided. Works best when you have a small number of sentences (dozens to hundreds) and need some resiliency to spelling errors (i.e., from text chat).
+
+## Usage
 
 ```python
 from nebulento import IntentContainer, MatchStrategy
@@ -67,3 +69,10 @@ container.calc_intent('I see food in the table')
 # 'utterance_remainder': 'the'}
 
 ```
+
+## Match Strategies
+
+- **Ratio**: Use `MatchStrategy.RATIO` when you need to compare strings and determine their overall similarity. It is effective for handling cases where strings have minor differences due to typos or spelling variations.
+- **Partial Ratio**: `MatchStrategy.PARTIAL_RATIO` is useful when you want to focus on the best matching substring between two strings. It handles cases where one string is a subset or prefix of the other, providing a more targeted similarity measure.
+- **Token Set Ratio**: `MatchStrategy.TOKEN_SET_RATIO` is ideal when you want to compare strings without considering their word order. It captures the essence of the strings’ content, making it suitable for scenarios where word arrangement might vary but the overall content remains similar.
+- **Token Sort Ratio**: Use `MatchStrategy.TOKEN_SORT_RATIO` when you want to compare strings and consider word order variations. It is particularly effective when the words are expected to be similar, but their arrangement may differ.
